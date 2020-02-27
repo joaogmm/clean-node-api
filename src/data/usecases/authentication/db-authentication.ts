@@ -8,7 +8,9 @@ export class DbAuthentication implements Authentication {
   }
 
   async auth (authentication: AuthenticationModel): Promise<string> {
-    await this.loadAccountByEmailRepository.load(authentication.email)
-    return null
+    const error = await this.loadAccountByEmailRepository.load(authentication.email)
+    if (error) {
+      return null
+    }
   }
 }
